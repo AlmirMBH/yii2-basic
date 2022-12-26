@@ -4,13 +4,24 @@ $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
+    // the keys are public properties of the application
+    // Application properties: https://www.yiiframework.com/doc/guide/2.0/en/structure-applications
     'id' => 'basic',
+    'name' => 'Yii2-Basic',
+    // app name in navbar
+    'language' => 'de',
+    // e.g. form messages
+    'defaultRoute' => 'site/login',
+    // landing
+    'timeZone' => 'America/Los_Angeles',
+    //'layout' => 'hello', // sets the main layout of the app
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
+    // components are singleton objects
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -44,14 +55,19 @@ $config = [
         'db' => $db,
         /*
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
+        'enablePrettyUrl' => true,
+        'showScriptName' => false,
+        'rules' => [
+        ],
         ],
         */
     ],
     'params' => $params,
+    // 4 types of events: before request, after request, before action and after action
+    'on afterRequest' => function () {
+        echo "<br><br><br>";
+        var_dump('EVENT TRIGGERED AFTER REQUEST');
+    },
 ];
 
 if (YII_ENV_DEV) {

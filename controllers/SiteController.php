@@ -129,6 +129,7 @@ class SiteController extends Controller
 
     public function actionHello($message)
     {
-        return $this->render('hello', ['message' => $message]);
+        $time = Yii::$app->formatter->asDatetime(time(), 'long');
+        return $this->render('hello', ['message' => $message, 'time' => $time]);
     }
 }
